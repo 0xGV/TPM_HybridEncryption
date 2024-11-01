@@ -1,0 +1,59 @@
+start=$(date +%s.%N)
+
+tpm2_encryptdecrypt -c handle -o 2k_enc newfile
+
+dur=$(echo "$(date +%s.%N) - $start" | bc)
+
+printf "encrypt 2k Execution time: %.6f seconds" $dur
+
+
+
+
+start=$(date +%s.%N)
+
+tpm2_encryptdecrypt -c handle -o 3k_enc newfile2
+
+dur=$(echo "$(date +%s.%N) - $start" | bc)
+
+printf "encrypt 3k Execution time: %.6f seconds" $dur
+
+
+
+start=$(date +%s.%N)
+
+tpm2_encryptdecrypt -c handle -o 5k_enc newfile3
+
+dur=$(echo "$(date +%s.%N) - $start" | bc)
+
+printf "encrypt 5k Execution time: %.6f seconds" $dur
+
+
+
+start=$(date +%s.%N)
+
+tpm2_encryptdecrypt -d -c handle -o 3k_dec 2k_enc
+
+dur=$(echo "$(date +%s.%N) - $start" | bc)
+
+printf "decrypt 2k Execution time: %.6f seconds" $dur
+
+
+
+
+start=$(date +%s.%N)
+
+tpm2_encryptdecrypt -d -c handle -o 3k_dec 3k_enc 
+
+dur=$(echo "$(date +%s.%N) - $start" | bc)
+
+printf "decrypt 3k Execution time: %.6f seconds" $dur
+
+
+
+start=$(date +%s.%N)
+
+tpm2_encryptdecrypt -d -c handle -o 5k_dec 5k_enc 
+
+dur=$(echo "$(date +%s.%N) - $start" | bc)
+
+printf "decrypt 5k Execution time: %.6f seconds" $dur
